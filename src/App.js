@@ -1,42 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState } from 'react'
+import axios from "axios";
+import ProductTable from './tables/ProductTable'
 
-class App extends Component {
-  state = {
-    isLoading: true,
-    groups: []
-  };
 
-  async componentDidMount() {
-    const response = await fetch('http://localhost:8080/api/v1/products');
-    const body = await response.json();
-    this.setState({ groups: body, isLoading: false });
-  }
+const App = () => {
 
-  render() {
-    const {groups, isLoading} = this.state;
+  const [products, setProducts] = useState([])
 
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/products")
+      .then(result => setProducts(result.data));
+  }, []);
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div className="App-intro">
-            <h2>JUG List</h2>
-            {groups.map(group =>
-              <div key={group.id}>
-                {group.name}
-              </div>
-            )}
-          </div>
-        </header>
+  return (
+    <div className="container">
+      <h1>CRUD App with Hooks</h1>
+      <div className="flex-row">
+        <div className="flex-large">
+          <h2>Add user</h2>
+        </div>
+        <div className="flex-large">
+          <h2>View users</h2>
+          <ProductTable products={products}/>
+        </div>
       </div>
-    );
-  }
+    </div>
+  )
 }
-
 export default App;
