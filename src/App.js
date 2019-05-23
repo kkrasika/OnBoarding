@@ -1,19 +1,9 @@
-import React, {useEffect, useState } from 'react'
-import axios from "axios";
+import React from 'react'
 import ProductTable from './tables/ProductTable'
 import AddProductForm from './forms/AddProductForm'
 
 
 const App = () => {
-
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/v1/products")
-      .then(result => setProducts(result.data));
-  }, []);
-
   return (
     <div className="container">
       <h1>CRUD App with Hooks</h1>
@@ -24,7 +14,7 @@ const App = () => {
         </div>
         <div className="flex-large">
           <h2>View users</h2>
-          <ProductTable products={products}/>
+          <ProductTable/>
         </div>
       </div>
     </div>
