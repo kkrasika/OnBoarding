@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductTable from './tables/ProductTable'
-import AddProductForm from './forms/AddProductForm'
+import EmployeeTable from './tables/EmployeeTable'
+import AddEmployeeForm from './forms/AddEmployeeForm'
 
 
 const App = () => {
@@ -10,11 +10,11 @@ const App = () => {
       <div className="flex-row">
         <div className="flex-large">
           <h2>Add user</h2>
-          <AddProductForm />
+          <AddEmployeeForm />
         </div>
         <div className="flex-large">
           <h2>View users</h2>
-          <ProductTable/>
+          <EmployeeTable/>
         </div>
       </div>
     </div>
