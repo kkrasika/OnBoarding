@@ -50,23 +50,13 @@ app.get("/api/v1/employees", (req, res, next) => {
            
         // query to the database and get the records
         
-        request.query('select * from Employee', function (err, recordset) {
+        request.query('select * from Employee', function (err, result) {
             
             if (err) console.log(err)
 
             // send records as a response
-            res.send(recordset);             
+            res.send(result.recordset);             
         });
     });
-       
-    //res.json(JSON.stringify(employees))
-	
-    /*
-	 res.json(
-			 [{"id":1,"name":"rasika","surname":"rasika","address":"rasika","description":null},
-				 {"id":3,"name":"janith","surname":"new","address":null,"description":null},
-				 {"id":4,"name":"nuwan","surname":"test","address":null,"description":null}]			 
-	 );
-	 */
     
 	});
