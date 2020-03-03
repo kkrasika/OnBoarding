@@ -26,9 +26,47 @@ app.use(function (req, res, next) {
 });
 
 app.get("/api/v1/employees", (req, res, next) => {
+	
+	var sql = require("mssql");
+	
+    var config = {
+            user: 'onboarding',
+            password: '1Welcome$',
+            server: 'localhost', 
+            database: 'onboarding',
+            options: {
+                encrypt: false
+            }
+        };
+    
+    employees = [];
+    
+    sql.connect(config, function (err) {
+        
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+           
+        // query to the database and get the records
+        
+        request.query('select * from Employee', function (err, recordset) {
+            
+            if (err) console.log(err)
+
+            // send records as a response
+            res.send(recordset);             
+        });
+    });
+       
+    //res.json(JSON.stringify(employees))
+	
+    /*
 	 res.json(
 			 [{"id":1,"name":"rasika","surname":"rasika","address":"rasika","description":null},
 				 {"id":3,"name":"janith","surname":"new","address":null,"description":null},
 				 {"id":4,"name":"nuwan","surname":"test","address":null,"description":null}]			 
 	 );
+	 */
+    
 	});
