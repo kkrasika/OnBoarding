@@ -7,7 +7,7 @@ const EmployeeTable = ()  => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/employees")
+      .get("http://localhost:3001/api/v1/employees")
       .then(result => setEmployees(result.data));
   }, []);
 
