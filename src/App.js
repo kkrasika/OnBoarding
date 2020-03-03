@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import AddEmployeeForm from './forms/AddEmployeeForm'
+import EmployeeTable from './tables/EmployeeTable'
 import Profile from './components/Profile';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -34,7 +35,8 @@ class App extends Component {
 	          <h2>Welcome to React Router Tutorial</h2><AuthButton/>
 	          <nav className="navbar navbar-expand-lg navbar-light bg-light">
 	          <ul className="navbar-nav mr-auto">
-	            <li><Link to={'/profile'} className="nav-link"> Profile </Link></li>
+	          	<li><Link to={'/EmployeeTable'} className="nav-link">Employees</Link></li>
+	            <li><Link to={'/profile'} className="nav-link">Profile</Link></li>
 	            <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
 	            <li><Link to={'/about'} className="nav-link">About</Link></li>
 	          </ul>
@@ -42,6 +44,7 @@ class App extends Component {
 	          <hr />
 	          <Switch>
 	              <Route exact path='/' component={Login} />
+	              <PrivateRoute path="/EmployeeTable" exact component={EmployeeTable} />
 	              <PrivateRoute path="/profile" exact component={Profile} />
 	              <PrivateRoute path='/contact' component={Contact} />
 	              <Route path='/about' component={About} />
