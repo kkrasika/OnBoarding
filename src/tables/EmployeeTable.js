@@ -25,7 +25,7 @@ const EmployeeTable = ()  => {
         employees.map(employee => (
           <tr key={employee.id}>
             <td>{employee.name}</td>
-            <td>{employee.price}</td>
+            <td>{employee.surname}</td>
             <td>
               <button className="button muted-button">Edit</button>
               <button className="button muted-button">Delete</button>
