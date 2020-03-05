@@ -6,11 +6,25 @@ import "../index.css";
 const fakeAuth = {
 		  isAuthenticated: false,
 		  authenticate(cb) {
-		    this.isAuthenticated = true
-		    setTimeout(cb, 100)
+		    		    
+	        const userObject = {
+		            username: 'test',
+		            password: 'test'
+		        };
+		    
+		    axios.post('http://localhost:3001/api/v1/login', userObject)
+		    .then((res) => {
+		        console.log(res.data.token)
+		        this.isAuthenticated = true
+			    setTimeout(cb, 100)
+		        localStorage.setItem('tokenval', res.data.token);
+		    }).catch((error) => {
+		        console.log(error)
+		    });		    
 		  },
 		  signout(cb) {
 		    this.isAuthenticated = false
+		    localStorage.removeItem('tokenval');
 		    setTimeout(cb, 100)
 		  }
 		}

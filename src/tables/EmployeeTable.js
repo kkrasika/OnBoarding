@@ -5,9 +5,12 @@ const EmployeeTable = ()  => {
 
   const [employees, setEmployees] = useState([])
 
+  var USER_TOKEN = localStorage.getItem('tokenval');
+  const AuthStr = 'Bearer '.concat(USER_TOKEN); 
+  
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/v1/employees")
+      .get("http://localhost:3001/api/v1/employees", { headers: { Authorization: AuthStr } })
       .then(result => setEmployees(result.data));
   }, []);
 

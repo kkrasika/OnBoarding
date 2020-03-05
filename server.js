@@ -1,5 +1,7 @@
 var express=require('express');
 var app=express();
+let jwt = require('jsonwebtoken')
+
 app.get('/',function(req,res)
 {
 res.send('Hello2 World!');
@@ -17,8 +19,10 @@ var config = {
         }
     };
 
-const pool1 = new sql.ConnectionPool(config);
+const username = "test"
+const password = "test"
 
+const pool1 = new sql.ConnectionPool(config);
 const pool1Connect = pool1.connect();
 
 pool1.on('error', err => {
@@ -34,7 +38,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -44,7 +48,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get("/api/v1/employees", (req, res, next) => {
+app.get("/api/v1/employees", ensureToken, (req, res, next) => {
 	
 	const JSRSASign = require("jsrsasign");
 	const key = "$PraveenIsAwesome!";
@@ -86,7 +90,7 @@ app.use(
 
 app.use(bodyParser.json())
 
-app.post('/api/v1/addemp', (req, res) => {
+app.post('/api/v1/addemp',ensureToken, (req, res) => {
 	
 	console.log(req.body.name)
 	  if(!req.body.name) {
@@ -121,3 +125,46 @@ app.post('/api/v1/addemp', (req, res) => {
 	   todo
 	 })
 	});
+
+
+app.post('/api/v1/login',(req, res) => {
+	 let p_username = req.body.username
+	 let p_password = req.body.password
+	 if(p_username == username && p_password == password){
+		  var token = jwt.sign(
+		   { username: username, 
+			 exp: Math.floor(Date.now() / 1000) + (60*60)}, 
+		   'secretkey',
+		   (err, token) => {
+		     res.send({
+		      ok: true,
+		      message: "Login successful",
+		      token:token
+		     })
+		   })
+		   console.log(token)
+		 } else {
+		  res.send({
+		   ok: false,
+		   message: "Username or password incorrect"
+		  })
+		 }
+	})
+
+function ensureToken(req, res, next) {
+
+	 var bearerHeader = req.headers["authorization"]
+	 if(typeof bearerHeader !== 'undefined') {
+		 const bearer = bearerHeader.split(" ")
+		 const bearerToken = bearer[1]
+
+			jwt.verify(bearerToken, 'secretkey', (err, result) => {
+			    if(err) { res.sendStatus(403) }
+			    else{ next() }
+			 } 	);	 
+	} else {
+		  res.sendStatus(403)
+	 }
+
+	console.log("sent success")
+}

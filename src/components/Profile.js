@@ -3,14 +3,17 @@ import axios from 'axios';
 
 async function makePostRequest(userObject) {
 
-	let res = await axios.post('http://localhost:3001/api/v1/addemp', userObject)
+	  var USER_TOKEN = localStorage.getItem('tokenval');
+	  const AuthStr = 'Bearer '.concat(USER_TOKEN); 
+	
+	let res = await axios.post('http://localhost:3001/api/v1/addemp', userObject, { headers: { Authorization: AuthStr }})
     .then((res) => {
         console.log(res.data)
+        console.log("sent success")
     }).catch((error) => {
+    	console.log("sent NOT success")
         console.log(error)
     });
-
-	console.log("sent success")
 }
 
 class Profile extends Component {
