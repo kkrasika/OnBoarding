@@ -32,7 +32,7 @@ class App extends Component {
 	    return (
 	    <Router>
 	        <div>
-	          <h2>Welcome to React Router Tutorial</h2><AuthButton/>
+	          <h2>On Boarding</h2><AuthButton/>
 	          <nav className="navbar navbar-expand-lg navbar-light bg-light">
 	          <ul className="navbar-nav mr-auto">
 	          	<li><Link to={'/EmployeeTable'} className="nav-link">Employees</Link></li>
@@ -55,24 +55,5 @@ class App extends Component {
 	    );
 	  }
 	}
-
-
-/*const App = () => {
-  return (
-    <div className="container">
-      <h1>CRUD App with Hooks</h1>
-      <div className="flex-row">
-        <div className="flex-large">
-          <h2>Add user</h2>
-          <AddEmployeeForm />
-        </div>
-        <div className="flex-large">
-          <h2>View users</h2>
-          <EmployeeTable/>
-        </div>
-      </div>
-    </div>
-  )
-}*/
 
 export default App;
