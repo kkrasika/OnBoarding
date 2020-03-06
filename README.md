@@ -1,7 +1,7 @@
 # On Boarding
 
-Commands 
+Commands  
 
-Client : nmp start 
-Server : node server.js
-Client in SSL : set HTTPS=true&&npm start
+Client : nmp start  
+Server : node server.js  
+Client in SSL : set HTTPS=true&&npm start  

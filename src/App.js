@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
-import AddEmployeeForm from './forms/AddEmployeeForm'
-import EmployeeTable from './tables/EmployeeTable'
+import EmployeeTable from './components/EmployeeTable'
 import Profile from './components/Profile';
 import About from './components/About';
 import Contact from './components/Contact';
