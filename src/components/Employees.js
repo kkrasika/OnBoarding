@@ -66,7 +66,8 @@ class Profile extends Component {
 	
   render() {
     return (
-    	<div className="wrapper">
+    	<div className="rowC">
+    	<div>
             <form onSubmit={this.onSubmit}>
 		        <div className="form-group">
 		            <label>Enter Name</label>
@@ -84,7 +85,10 @@ class Profile extends Component {
 		            <input type="submit" value="Create User" className="btn btn-success btn-block" />
 		        </div>
             </form>
+            </div>
+            <div>
             <EmployeeTable/>
+            </div>
         </div>
 
     );
