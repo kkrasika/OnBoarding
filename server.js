@@ -29,6 +29,16 @@ pool1.on('error', err => {
     // ... error handler
 })
 
+const bodyParser = require('body-parser')
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+)
+
+app.use(bodyParser.json())
+
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -79,16 +89,6 @@ app.get("/api/v1/employees", ensureToken, (req, res, next) => {
     });
     
 });
-
-const bodyParser = require('body-parser')
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-)
-
-app.use(bodyParser.json())
 
 app.post('/api/v1/addemp',ensureToken, (req, res) => {
 	
